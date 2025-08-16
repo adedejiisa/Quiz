@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <style>
+
+body {
+  background: #fdf7e3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #3b2f1f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#main {
+  background: #fff9e6;
+  border-radius: 15px;
+  width: 320px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 20px rgba(197, 155, 62, 0.4);
+  text-align: center;
+}
+
+#question {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #C59B3E;
+}
+
+#options button {
+  background: #C59B3E;
+  border: none;
+  color: white;
+  padding: 12px 18px;
+  margin: 8px 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 120px;
+}
+
+#options button:hover {
+  background: #a07c2d;
+}
+
+#feedback {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 24px;
+  color: #3b2f1f;
+}
+
+#score {
+  margin-top: 30px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #C59B3E;
+}
+  #restart{
+    text-decoration:none;
+    background:#C59B3E;
+    padding:10px;
+    border-radius:5px;
+    color:#ffe;
+  }
+  </style>
+</head>
+<body>
+  <main id="main">
+    <div id="quizSection">
+      <div id="question"></div>
+      <div id="options"></div>
+      <div id="feedback"></div>
+    </div>
+    <div id="score"></div>
+    <a onclick='window.location.reload()' id='restart' style="display:none;">restart quiz</a>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        quiz: "1.What is 2+2",
+        options: ['A.4', 'B.6', 'C.9', 'D.5'],
+        answer: 'A.4'
+},
+      {
+        quiz: "2.Who is Tinubu",
+        options: ['A.president', 'B.governor', 'C.chairman', 'D.councillor'],
+        answer: 'A.president'
+},
+  {
+        quiz: "3.How many states are there in Nigeria",
+        options: ['A.36', 'B.35', 'C.32', 'D.40'],
+        answer: 'A.36'
+},
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("question").textContent = q.quiz;
+      const optionsList = document.getElementById("options");
+      optionsList.innerHTML = "";
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.addEventListener("click", () => checkAnswer(option));
+        optionsList.appendChild(btn);
+});
+}
+
+    function checkAnswer(selected) {
+      const correct = questions[currentQuestion].answer;
+      const feedback = document.getElementById("feedback");
+      const scores = document.getElementById("score");
+      if (selected === correct) {
+        score++;
+        feedback.textContent = "✅ Correct!";
+        feedback.style.color = "#4CAF50";
+} else {
+        feedback.textContent = "❌ Wrong!";
+        feedback.style.color = "#F44336";
+}
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        setTimeout(() => {
+          feedback.textContent = "";
+          loadQuestion();
+}, 1000);
+} else {
+  restart.style.display ='block';
+        document.getElementById("quizSection").style.display = 'none';
+        scores.textContent = `Final Score: Your Score is ${score}/${questions.length}`;
+}
+}
+
+    loadQuestion();
+  </script>
+</body>
+</html>
