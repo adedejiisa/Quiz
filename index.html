@@ -6,7 +6,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz App</title>
   <style>
-
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }.quiz-intro {
+      justify-self:center;
+      background: white;
+      border: 6px solid #C59B3E;
+      border-radius: 15px;
+      padding: 30px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(197,155,62,0.4);
+    }
+    h1 {
+      color: #C59B3E;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #C59B3E;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #a37627;
+    }
 body {
   background: #fdf7e3;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -76,7 +117,13 @@ body {
 </head>
 <body>
   <main id="main">
-    <div id="quizSection">
+    <div class="quiz-intro" style="display:block;" id="quizIntro">
+      <!--<img src="31045a65-9682-415a-8720-cebb14cd0f8d.jpg" alt="Laxmi School Seal"/>-->
+    <h1>Welcome to the Quiz!</h1>
+    <p>Test your knowledge and see how far you’ve come. Ready to start?</p>
+    <button onclick="quizSection.style.display = 'block'; quizIntro.style.display ='none';">Start Quiz</button>
+  </div>
+    <div id="quizSection" style="display:none;">
       <div id="question"></div>
       <div id="options"></div>
       <div id="feedback"></div>
